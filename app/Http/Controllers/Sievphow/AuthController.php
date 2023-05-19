@@ -133,22 +133,16 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    // public function logout() {
-    //     auth()->logout();
-    //     return response()->json([
-    //         "success" => true,
-    //         'message' => 'User successfully signed out']);
-    // }
     /**
      * Refresh a token.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function refresh() {
-        return $this->createNewToken([
-            "success" => true,
-            auth()->refresh()
-        ]);
+        $user = auth()->user();
+        $user->api_token = Str::random(60);
+        $user->save();
+        return $user->api_token;
     }
     /**
      * Get the authenticated User.
@@ -190,13 +184,4 @@ class AuthController extends Controller
         return $user->api_token;
     }
 
-    protected function createNewToken($token){
-        return response()->json([
-            'access_token' => $token,
-            "success" => true,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()
-        ]);
-    }
 }
