@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Sievphow;
 
 use App\Http\Controllers\Controller;
+use App\Models\Sievphow\BookCategory;
+use App\Models\Sievphow\Books;
 use Illuminate\Http\Request;
 use App\Models\Sievphow\SlideImage;
 use Illuminate\Support\Facades\Validator;
@@ -25,10 +27,24 @@ class SlideImagesController extends Controller
     public function index()
     {
         $imageSlide = SlideImage::all();
+        $bookTop = Books::orderBy('favorite', 'desc')  
+        ->take(10)                         
+        ->get();
+        $bookPop = Books::orderBy('favorite', 'desc') 
+        ->take(10)                         
+        ->get();
+        $books = Books::orderBy('created_at', 'desc') 
+        ->take(14)                         
+        ->get();
         return response()->json([
             "message" => "SlideImage",
             "success" => true,
-            "data" => $imageSlide
+            "data" => [
+                'imageSlide' => $imageSlide,
+                'bookTop' => $bookTop,
+                'bookPop' => $bookPop,
+                'books' => $books
+            ],
         ]);
     }
 
