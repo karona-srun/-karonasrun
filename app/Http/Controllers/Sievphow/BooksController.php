@@ -58,7 +58,9 @@ class BooksController extends Controller
             'author' => 'required',
             'short_description_kh' => 'required',
             'short_description_en' => 'required',
-            // 'image' => 'required',
+            'image' => 'required',
+            'audio' => 'required',
+            'pdf' => 'required',
         ]);
 
         if($validator->fails()){
@@ -77,6 +79,12 @@ class BooksController extends Controller
             $file-> move(public_path('images/sievphow/audios'), $audio_filename);
         }
 
+        if($request->file('pdf')){
+            $file= $request->file('pdf');
+            $pdf_filename= date('YmdHi').str_replace(' ', '_', $file->getClientOriginalName());
+            $file-> move(public_path('images/sievphow/pdfs'), $pdf_filename);
+        }
+
         $book =  new Books();
         $book->title_kh = $request->title_kh;
         $book->title_en = $request->title_en;
@@ -87,6 +95,7 @@ class BooksController extends Controller
         $book->short_description_kh = $request->short_description_kh;
         $book->short_description_en = $request->short_description_en;
         $book->image = $filename ?? null;
+        $book->pdf = $pdf_filename ?? null;
         $book->audio = $audio_filename ?? null;
         $book->save();
 
@@ -166,6 +175,13 @@ class BooksController extends Controller
             $audio_filename= date('YmdHi').str_replace(' ', '_', $file->getClientOriginalName());
             $file-> move(public_path('images/sievphow/audios'), $audio_filename);
             $book->audio = $audio_filename;
+        }
+
+        if($request->file('audio')){
+            $file= $request->file('audio');
+            $pdf_filename= date('YmdHi').str_replace(' ', '_', $file->getClientOriginalName());
+            $file-> move(public_path('images/sievphow/pdfs'), $pdf_filename);
+            $book->pdf = $pdf_filename;
         }
         
         $book->title_kh = $request->title_kh;

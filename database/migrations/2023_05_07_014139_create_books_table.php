@@ -24,6 +24,7 @@ class CreateBooksTable extends Migration
             $table->longText('short_description_kh');
             $table->longText('short_description_en');
             $table->string('image')->nullable();
+            $table->string('pdf')->nullable();
             $table->string('audio')->nullable();
             $table->softDeletes();
             $table->timestamps();
