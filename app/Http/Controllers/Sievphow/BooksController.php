@@ -177,8 +177,8 @@ class BooksController extends Controller
             $book->audio = $audio_filename;
         }
 
-        if($request->file('audio')){
-            $file= $request->file('audio');
+        if($request->file('pdf')){
+            $file= $request->file('pdf');
             $pdf_filename= date('YmdHi').str_replace(' ', '_', $file->getClientOriginalName());
             $file-> move(public_path('images/sievphow/pdfs'), $pdf_filename);
             $book->pdf = $pdf_filename;
