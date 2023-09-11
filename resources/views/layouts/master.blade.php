@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Karona Developer') }}</title>
     <link rel="shortcut icon" href="{{ asset('logo/Logo_white.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -17,13 +17,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
     <style>
         @import url('https://rsms.me/inter/inter.css');
+
         :root {
             --tblr-font-sans-serif: Inter, -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
         }
+
         .ti {
             font-size: 1.2rem;
         }
     </style>
+    @yield('css')
 </head>
 
 <body>
@@ -222,13 +225,15 @@
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                            <span class="avatar avatar-sm" style="background-image: url('{{ asset('logo/logo.png') }}')"></span>
+                        <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
+                            aria-label="Open user menu">
+                            <span class="avatar avatar-sm"
+                                style="background-image: url('{{ asset('logo/logo.png') }}')"></span>
                             <div class="d-none d-xl-block ps-2">
-                              <div>{{ Auth::user()->name }}</div>
-                              <div class="mt-1 small text-muted">Administrator</div>
+                                <div>{{ Auth::user()->name }}</div>
+                                <div class="mt-1 small text-muted">Administrator</div>
                             </div>
-                          </a>
+                        </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                             <a href="#" class="dropdown-item">Status</a>
                             <a href="#" class="dropdown-item">Profile</a>
@@ -236,14 +241,14 @@
                             <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item">Settings</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
+                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                {{ __('Logout') }}
+                            </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -289,188 +294,102 @@
                                         </svg>
                                     </span>
                                     <span class="nav-link-title">
-                                        API Application
+                                        TubeKH App
                                     </span>
                                 </a>
                                 <div class="dropdown-menu">
                                     <div class="dropdown-menu-columns">
                                         <div class="dropdown-menu-column">
-                                            <span class="dropdown-item text-danger"> -> FunKH API</span>
-                                            <a class="dropdown-item" href="{{ url('image-slides') }}">Image Slides</a>
+                                            <a class="dropdown-item" href="{{ url('image-slides') }}">
+                                                <i class="ti ti-slideshow me-2"></i> Image Slides</a>
                                             <a class="dropdown-item" href="{{ url('videos-categories') }}">
-                                                Video Categories
+                                                <i class="ti ti-category-2 me-2"></i> Video Categories
                                             </a>
                                             <a class="dropdown-item" href="{{ url('videos') }}">
-                                                Videos
-                                            </a>
-                                        </div>
-                                        <div class="dropdown-menu-column">
-                                            <span class="dropdown-item text-danger"> -> Facebook API</span>
-                                            <a class="dropdown-item" href="{{ url('image-slides') }}">Posts In Page</a>
-                                            <a class="dropdown-item" href="{{ url('videos-categories') }}">
-                                                Posts In Group
-                                            </a>
-                                        </div>
-                                        <div class="dropdown-menu-column">
-                                            <span class="dropdown-item text-danger"> -> Sievphow API</span>
-                                            <a class="dropdown-item" href="{{ url('image-slides') }}">Slide Images</a>
-                                            <a class="dropdown-item" href="{{ url('videos-categories') }}">Books List</a>
-                                            <a class="dropdown-item" href="{{ url('videos-categories') }}">Book Categories</a>
-                                            <a class="dropdown-item" href="{{ url('videos-categories') }}">Users List</a>
-                                            <a class="dropdown-item" href="{{ url('videos-categories') }}">Contents List</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                        <!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                            height="24" viewBox="0 0 24 24" stroke-width="2"
-                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <polyline points="9 11 12 14 20 6" />
-                                            <path
-                                                d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" />
-                                        </svg>
-                                    </span>
-                                    <span class="nav-link-title">
-                                        Form elements
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
-                                    data-bs-auto-close="outside" role="button" aria-expanded="false">
-                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                        <!-- Download SVG icon from http://tabler-icons.io/i/layout-2 -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                            height="24" viewBox="0 0 24 24" stroke-width="2"
-                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <rect x="4" y="4" width="6" height="5"
-                                                rx="2" />
-                                            <rect x="4" y="13" width="6" height="7"
-                                                rx="2" />
-                                            <rect x="14" y="4" width="6" height="7"
-                                                rx="2" />
-                                            <rect x="14" y="15" width="6" height="5"
-                                                rx="2" />
-                                        </svg>
-                                    </span>
-                                    <span class="nav-link-title">
-                                        Layout
-                                    </span>
-                                </a>
-                                <div class="dropdown-menu">
-                                    <div class="dropdown-menu-columns">
-                                        <div class="dropdown-menu-column">
-                                            <a class="dropdown-item" href="#">
-                                                Horizontal
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                Boxed
-                                                <span class="badge badge-sm bg-green text-uppercase ms-2">New</span>
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                Vertical
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                Vertical transparent
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                Right vertical
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                Condensed
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                Combined
-                                            </a>
-                                        </div>
-                                        <div class="dropdown-menu-column">
-                                            <a class="dropdown-item" href="#">
-                                                Navbar dark
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                Navbar sticky
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                Navbar overlap
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                RTL mode
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                Fluid
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                Fluid vertical
+                                                <i class="ti ti-movie me-2"></i> Videos
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                        <!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                            height="24" viewBox="0 0 24 24" stroke-width="2"
-                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path
-                                                d="M5 11a7 7 0 0 1 14 0v7a1.78 1.78 0 0 1 -3.1 1.4a1.65 1.65 0 0 0 -2.6 0a1.65 1.65 0 0 1 -2.6 0a1.65 1.65 0 0 0 -2.6 0a1.78 1.78 0 0 1 -3.1 -1.4v-7" />
-                                            <line x1="10" y1="10" x2="10.01" y2="10" />
-                                            <line x1="14" y1="10" x2="14.01" y2="10" />
-                                            <path d="M10 14a3.5 3.5 0 0 0 4 0" />
-                                        </svg>
-                                    </span>
-                                    <span class="nav-link-title">
-                                        2681 icons
-                                    </span>
-                                </a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
                                     data-bs-auto-close="outside" role="button" aria-expanded="false">
-                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                        <!-- Download SVG icon from http://tabler-icons.io/i/lifebuoy -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                            height="24" viewBox="0 0 24 24" stroke-width="2"
-                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <circle cx="12" cy="12" r="4" />
-                                            <circle cx="12" cy="12" r="9" />
-                                            <line x1="15" y1="15" x2="18.35" y2="18.35" />
-                                            <line x1="9" y1="15" x2="5.65" y2="18.35" />
-                                            <line x1="5.65" y1="5.65" x2="9" y2="9" />
-                                            <line x1="18.35" y1="5.65" x2="15" y2="9" />
-                                        </svg>
-                                    </span>
+                                    <i class="ti ti-books me-2"></i>
                                     <span class="nav-link-title">
-                                        Help
+                                        Sievphow App
                                     </span>
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item text-pink" href="#"
-                                        target="_blank" rel="noopener">
-                                        <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-inline me-1"
-                                            width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path
-                                                d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
-                                        </svg>
-                                        Sponsor project!
-                                    </a>
+                                    <div class="dropdown-menu-column">
+                                        <a class="dropdown-item" href="{{ url('/sievphow/slide-image') }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-slideshow me-2" width="24"
+                                                height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M15 6l.01 0"></path>
+                                                <path
+                                                    d="M3 3m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z">
+                                                </path>
+                                                <path d="M3 13l4 -4a3 5 0 0 1 3 0l4 4"></path>
+                                                <path d="M13 12l2 -2a3 5 0 0 1 3 0l3 3"></path>
+                                                <path d="M8 21l.01 0"></path>
+                                                <path d="M12 21l.01 0"></path>
+                                                <path d="M16 21l.01 0"></path>
+                                            </svg>
+                                            Slide Images</a>
+                                        <a class="dropdown-item" href="{{ url('/sievphow/book-category') }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-box-multiple me-2" width="24"
+                                                height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path
+                                                    d="M7 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z">
+                                                </path>
+                                                <path
+                                                    d="M17 17v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2">
+                                                </path>
+                                            </svg>
+                                            Book Categories</a>
+                                        <a class="dropdown-item" href="{{ url('/sievphow/book') }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-address-book me-2" width="24"
+                                                height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path
+                                                    d="M20 6v12a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2z">
+                                                </path>
+                                                <path d="M10 16h6"></path>
+                                                <path d="M13 11m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                                                <path d="M4 8h3"></path>
+                                                <path d="M4 12h3"></path>
+                                                <path d="M4 16h3"></path>
+                                            </svg>
+                                            Books List</a>
+
+                                        <a class="dropdown-item" href="{{ url('/sievphow/user') }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-user-square-rounded me-2"
+                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M12 13a3 3 0 1 0 0 -6a3 3 0 0 0 0 6z"></path>
+                                                <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z">
+                                                </path>
+                                                <path d="M6 20.05v-.05a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v.05"></path>
+                                            </svg>
+                                            Users List</a>
+                                            <a class="dropdown-item" href="{{ url('/sievphow/broadcasts') }}">
+                                            <i class="ti ti-send me-2"></i> Broadcast
+                                            </a>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -551,12 +470,44 @@
                         <path d="M9 12l2 2l4 -4" />
                     </svg>
                     <h3>Create successed</h3>
-                    <div class="text-muted">Your create has been successfully submitted.</div>
+                    <div class="text-muted">Your created has been successfully submitted.</div>
                 </div>
                 <div class="modal-footer">
                     <div class="w-100">
                         <div class="row">
-                            <div class="col"><a href="#" class="btn btn-success w-100 btn-reload" data-bs-dismiss="modal">
+                            <div class="col"><a href="#" class="btn btn-success w-100 btn-reload"
+                                    data-bs-dismiss="modal">
+                                    Done
+                                </a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-blur fade" id="modal-updated" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-status bg-success"></div>
+                <div class="modal-body text-center py-4">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/circle-check -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M9 12l2 2l4 -4" />
+                    </svg>
+                    <h3>Update successed</h3>
+                    <div class="text-muted">Your updated has been successfully submitted.</div>
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                        <div class="row">
+                            <div class="col"><a href="#" class="btn btn-success w-100 btn-reload"
+                                    data-bs-dismiss="modal">
                                     Done
                                 </a></div>
                         </div>
@@ -570,6 +521,65 @@
     <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
     <script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script>
+        // @formatter:off
+        document.addEventListener("DOMContentLoaded", function() {
+            var el;
+            window.TomSelect && (new TomSelect(el = document.getElementById('select-users'), {
+                copyClassesToDropdown: false,
+                dropdownClass: 'dropdown-menu ts-dropdown',
+                optionClass: 'dropdown-item',
+                controlInput: '<input>',
+                render: {
+                    item: function(data, escape) {
+                        if (data.customProperties) {
+                            return '<div><span class="dropdown-item-indicator">' + data
+                                .customProperties + '</span>' + escape(data.text) + '</div>';
+                        }
+                        return '<div>' + escape(data.text) + '</div>';
+                    },
+                    option: function(data, escape) {
+                        if (data.customProperties) {
+                            return '<div><span class="dropdown-item-indicator">' + data
+                                .customProperties + '</span>' + escape(data.text) + '</div>';
+                        }
+                        return '<div>' + escape(data.text) + '</div>';
+                    },
+                },
+            }));
+        });
+        // @formatter:on
+    </script>
+    <script>
+        // @formatter:off
+        document.addEventListener("DOMContentLoaded", function() {
+            var el;
+            window.TomSelect && (new TomSelect(el = document.getElementsByClassName('select-option'), {
+                copyClassesToDropdown: false,
+                dropdownClass: 'dropdown-menu ts-dropdown',
+                optionClass: 'dropdown-item',
+                controlInput: '<input>',
+                render: {
+                    item: function(data, escape) {
+                        if (data.customProperties) {
+                            return '<div><span class="dropdown-item-indicator">' + data
+                                .customProperties + '</span>' + escape(data.text) + '</div>';
+                        }
+                        return '<div>' + escape(data.text) + '</div>';
+                    },
+                    option: function(data, escape) {
+                        if (data.customProperties) {
+                            return '<div><span class="dropdown-item-indicator">' + data
+                                .customProperties + '</span>' + escape(data.text) + '</div>';
+                        }
+                        return '<div>' + escape(data.text) + '</div>';
+                    },
+                },
+            }));
+        });
+        // @formatter:on
+    </script>
     @yield('js')
 </body>
 

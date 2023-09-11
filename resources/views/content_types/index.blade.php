@@ -53,7 +53,7 @@
                                             <td>{{ ++$i }}</td>
                                             <td><span class="text-muted">{{ $item->name }}</span></td>
                                             <td>
-                                                <img src="{{ $item->image }}" alt="" srcset=""
+                                                <img src="{{ asset($item->image) }}" alt="" srcset=""
                                                     class="avatar me-2">
                                             </td>
                                             <td>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Sievphow;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Sievphow\BookCategory;
+use App\Models\BookCategory;
 use Illuminate\Support\Facades\Validator;
 
 class BooksCategoryController extends Controller

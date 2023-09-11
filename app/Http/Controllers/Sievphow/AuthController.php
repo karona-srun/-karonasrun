@@ -139,7 +139,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function refresh() {
-        $user = auth()->user();
+        $user = User::find(auth()->user()->id);
         $user->api_token = Str::random(60);
         $user->save();
         return $user->api_token;
@@ -165,7 +165,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        $user = auth()->user();
+        $user = User::find(auth()->user()->id);
         $user->api_token = "";
         $user->save();
 

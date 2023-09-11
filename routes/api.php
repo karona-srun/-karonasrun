@@ -45,6 +45,10 @@ Route::group(['prefix' => 'sievphow/auth', 'middleware' => 'auth.api',], functio
 Route::group(['prefix' => 'sievphow','middleware' => 'auth.api'], function($router){
     Route::resource('book-categories', BooksCategoryController::class);
     Route::resource('books', BooksController::class);
+    Route::post('/save-books', [BooksController::class, 'saveBooks']);
+    Route::get('/un-save-books/{id}', [BooksController::class, 'unSaveBooks']);
+    Route::get('/retrieve-books', [BooksController::class, 'retrieveBook']);
+    Route::get('/books/filter-book-by-category/{id}', [BooksController::class, 'filterBookByCategory']);
     Route::resource('users', UserController::class);
     Route::resource('slide', SlideImagesController::class);
 });

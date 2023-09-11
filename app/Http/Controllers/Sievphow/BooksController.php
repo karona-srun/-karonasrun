@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Sievphow;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Sievphow\Books;
+use App\Models\Books;
+use App\Models\BookUser;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class BooksController extends Controller
@@ -57,10 +60,7 @@ class BooksController extends Controller
             'publisher' => 'required',
             'author' => 'required',
             'short_description_kh' => 'required',
-            'short_description_en' => 'required',
-            'image' => 'required',
-            'audio' => 'required',
-            'pdf' => 'required',
+            'short_description_en' => 'required'
         ]);
 
         if($validator->fails()){
@@ -78,7 +78,7 @@ class BooksController extends Controller
             $audio_filename= date('YmdHi').str_replace(' ', '_', $file->getClientOriginalName());
             $file-> move(public_path('images/sievphow/audios'), $audio_filename);
         }
-
+        
         if($request->file('pdf')){
             $file= $request->file('pdf');
             $pdf_filename= date('YmdHi').str_replace(' ', '_', $file->getClientOriginalName());
@@ -137,6 +137,16 @@ class BooksController extends Controller
             "data" => $books
         ]);
     }
+    
+    public function filterBookByCategory($id)
+    {
+        $books = Books::where('book_categories_id',$id)->get();
+        return response()->json([
+            "message" => "Books list",
+            "success" => true,
+            "data" => $books
+        ]);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -176,7 +186,7 @@ class BooksController extends Controller
             $file-> move(public_path('images/sievphow/audios'), $audio_filename);
             $book->audio = $audio_filename;
         }
-
+        
         if($request->file('pdf')){
             $file= $request->file('pdf');
             $pdf_filename= date('YmdHi').str_replace(' ', '_', $file->getClientOriginalName());
@@ -197,6 +207,42 @@ class BooksController extends Controller
             "message" => "Books list",
             "success" => true,
             "data" => $book
+        ]);
+    }
+
+
+    public function saveBooks(Request $request)
+    {
+        $book = Books::find($request->book_id);	
+        $userIds = User::find(Auth::user()->id)->id;
+        $book->users()->attach($userIds);
+
+        return response()->json([
+            "message" => "Save books",
+            "success" => true,
+            "book" => $book
+        ]);
+    }
+
+    public function unSaveBooks($id)
+    {
+        $unSave = BookUser::where('book_id',$id);
+        $unSave->delete();
+
+        return response()->json([
+            "message" => "unSave books",
+            "success" => true,
+            "book" => $unSave
+        ]);
+    }
+
+    public function retrieveBook(){
+        $user = User::find(Auth::user()->id);	
+        $books = $user->books;
+        return response()->json([
+            "message" => "Retrieve Book",
+            "success" => true,
+            "book" => $books
         ]);
     }
 

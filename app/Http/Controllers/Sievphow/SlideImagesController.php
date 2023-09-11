@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Sievphow;
 
 use App\Http\Controllers\Controller;
-use App\Models\Sievphow\BookCategory;
-use App\Models\Sievphow\Books;
 use Illuminate\Http\Request;
-use App\Models\Sievphow\SlideImage;
+use App\Models\BookCategory;
+use App\Models\Books;
+use App\Models\SlideImage;
 use Illuminate\Support\Facades\Validator;
 
 class SlideImagesController extends Controller
@@ -26,7 +26,7 @@ class SlideImagesController extends Controller
      */
     public function index()
     {
-        $imageSlide = SlideImage::all();
+        $imageSlide = SlideImage::where('status', 1)->all();
         $bookTop = Books::orderBy('favorite', 'desc')  
         ->take(10)                         
         ->get();
@@ -80,9 +80,12 @@ class SlideImagesController extends Controller
             $file-> move(public_path('images/sievphow/image_slides'), $filename);
         }
 
-        if($request->id){
+        $isCreate = true;
+
+        if($request->id != ""){
             $imageSlide = SlideImage::find($request->id);
             $imageSlide->image = $request->file('image') ? '/images/sievphow/image_slides/'.$filename : '';
+            $isCreate = false;
         }else{
             $imageSlide = new SlideImage();
             $imageSlide->image = '/images/sievphow/image_slides/'.$filename ?? '';
@@ -93,6 +96,7 @@ class SlideImagesController extends Controller
         return response()->json([
             "message" => "SlideImage",
             "success" => true,
+            "progress_status" => $isCreate,
             "data" => $imageSlide
         ]);
     }
@@ -152,7 +156,7 @@ class SlideImagesController extends Controller
             $file-> move(public_path('images/sievphow/image_slides'), $filename);
         }
 
-        if($request->id){
+        if($request->id || $id){
             $imageSlide = SlideImage::find($request->id);
             $imageSlide->image = $request->file('image') ? '/images/sievphow/image_slides/'.$filename : '';
         }else{

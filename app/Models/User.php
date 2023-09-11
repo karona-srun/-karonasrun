@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Books;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -38,4 +39,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
+    public function books()
+    {
+        return $this->belongsToMany(Books::class, 'book_user','user_id','book_id');
+    }
+
 }
