@@ -18,15 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-  return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\WelcomeController::class, 'welcome']);
+Route::get('privacy_policy', [App\Http\Controllers\WelcomeController::class, 'privacyPolicy']);
+Route::get('projects/show/{id}', [App\Http\Controllers\WelcomeController::class, 'projectDetail']);
 
 Route::get('lang/{lang}', [App\Http\Controllers\LangController::class, 'change']);
-
-Route::get('/privacy-policy', function () {
-  return view('privacy_policy');
-});
 
 Auth::routes([
   'login' => true,
@@ -34,7 +30,6 @@ Auth::routes([
   'reset' => false, // Password Reset Routes...
   'verify' => false, // Email Verification Routes...
 ]);
-
 
 Route::group(['middleware' => 'auth'], function ($router) {
   Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

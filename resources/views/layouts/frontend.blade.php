@@ -53,6 +53,14 @@
             border-radius: 2px;
         }
 
+        .display-7{
+            font-size: 1em;
+        }
+
+        .display-8{
+            font-size: 1.2em;
+        }
+
         #scroll-to-top {
             position: fixed;
             bottom: 20px;
@@ -68,12 +76,12 @@
             border-top: 2px solid rgb(13 110 252) !important;
         }
 
-        .card:hover {
+        /* .card:hover {
             padding: 5px;
             transition-delay: 50ms;
             transition-duration: 500ms;
-            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
-        }
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+        } */
     </style>
 </head>
 
@@ -90,14 +98,14 @@
                 </a>
 
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#home_page" class="nav-link px-2 link-secondary"><i
+                    <li><a href="/#home_page" class="nav-link px-2 link-secondary"><i
                                 class="bi bi-house me-1"></i>{{ __('app.home_page') }}</a></li>
-                    <li><a href="#project_page" class="nav-link px-2 link-dark"><i
+                    <li><a href="/#project_page" class="nav-link px-2 link-dark"><i
                                 class="bi bi-file-earmark-code me-1"></i>{{ __('app.project_page') }}</a></li>
-                    <li><a href="#services_page" class="nav-link px-2 link-dark"><i
+                    <li><a href="/#services_page" class="nav-link px-2 link-dark"><i
                                 class="bi bi-mouse me-1"></i>{{ __('app.services_page') }}</a></li>
-                    <li><a href="#faqs_page" class="nav-link px-2 link-dark">{{ __('app.faqs_page') }}</a></li>
-                    <li><a href="#about_page" class="nav-link px-2 link-dark"><i
+                    <li><a href="/#faqs_page" class="nav-link px-2 link-dark">{{ __('app.faqs_page') }}</a></li>
+                    <li><a href="/#about_page" class="nav-link px-2 link-dark"><i
                                 class="bi bi-shield-exclamation me-1"></i>
                             {{ __('app.about_page') }}</a></li>
                     @if (session()->get('lang') == 'en')
@@ -153,118 +161,7 @@
             </div>
         </div>
 
-        <div class="container-fluid" id="project_page">
-            <div class="container pt-3 pb-3">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 mx-auto pb-2">
-                        <div class="mb-3">
-                            <h3><i class="bi bi-file-earmark-code me-1"></i>{{ __('app.project_page') }}
-                            </h3>
-                        </div>
-                        <p class="text-muted">{{ __('app.label_project_info') }}</p>
-                    </div>
-
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-                        <a href="{{ url('projects/show/1') }}" class="text-start" style="text-decoration: auto;">
-                        <div class="col">
-                            <div class="card">
-                                <img class="card-img-top p-3" src="{{ asset('logo/mobile-development.png') }}" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ __('app.label_web_application') }}</h5>
-                                    <p class="card-text">{{ __('app.label_web_application_info') }}</p>
-                                </div>
-                             </div>
-                        </div>
-                        </a>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid" id="services_page">
-            <div class="container">
-                <div class="mt-5">
-                    <div class="border-bottom">
-                        <h3><i class="bi bi-file-earmark-code me-1"></i>{{ __('app.services_page') }}
-                        </h3>
-                    </div>
-
-                    <div class="row row-cols-1 row-cols-md-2 align-items-md-top g-5 py-5">
-                        <div class="col d-flex flex-column align-items-start gap-2">
-                            <h2 class="fw-bold text-body-emphasis">{{ __('app.services_page_title') }}
-                            </h2>
-                            <p class="text-muted">{{ __('app.services_page_info') }}​
-                                {{ __('app.label_web_application') }} {{ __('app.label_mobile_application') }}
-                                {{ __('app.label_tester') }} {{ __('app.label_apis') }}
-                                {{ __('app.label_design_logo_and_poster_') }}</p>
-                            <a href="#services_page" class="btn btn-primary">{{ __('app.btn_get_more') }}</a>
-                        </div>
-
-                        <div class="col">
-                            <div class="row row-cols-1 row-cols-sm-2 g-4">
-                                <div class="col d-flex flex-column gap-2">
-                                    <div
-                                        class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3 p-3">
-                                        <img src="{{ asset('logo/web-development.png') }}" alt="" srcset=""
-                                            width="128px" height="128px">
-                                    </div>
-                                    <h4 class="fw-semibold mb-0 text-body-emphasis">{{ __('app.label_web_application') }}
-                                    </h4>
-                                    <p class="text-body-secondary">{{ __('app.label_web_application_info') }}</p>
-                                </div>
-
-                                <div class="col d-flex flex-column gap-2">
-                                    <div
-                                        class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-light bg-gradient fs-4 rounded-3 p-3">
-                                        <img src="{{ asset('logo/mobile-development.png') }}" alt=""
-                                            srcset="" width="128px" height="128px">
-                                    </div>
-                                    <h4 class="fw-semibold mb-0 text-body-emphasis">
-                                        {{ __('app.label_mobile_application') }}</h4>
-                                    <p class="text-body-secondary">{{ __('app.label_mobile_application_info') }}</p>
-                                </div>
-
-                                <div class="col d-flex flex-column gap-2">
-                                    <div
-                                        class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-info  bg-gradient fs-4 rounded-3 p-3">
-                                        <img src="{{ asset('logo/software.png') }}" alt="" srcset=""
-                                            width="128px" height="128px">
-                                    </div>
-                                    <h4 class="fw-semibold mb-0 text-body-emphasis">{{ __('app.label_tester') }}</h4>
-                                    <p class="text-body-secondary">{{ __('app.label_tester_info') }}</p>
-                                </div>
-
-                                <div class="col d-flex flex-column gap-2">
-                                    <div
-                                        class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-secondary  bg-gradient fs-4 rounded-3 p-3">
-                                        <img src="{{ asset('logo/api.png') }}" alt="" srcset=""
-                                            width="128px" height="128px">
-                                    </div>
-                                    <h4 class="fw-semibold mb-0 text-body-emphasis">{{ __('app.label_apis') }}</h4>
-                                    <p class="text-body-secondary">{{ __('app.label_apis_info') }}</p>
-                                </div>
-
-                                <div class="col d-flex flex-column gap-2">
-                                    <div
-                                        class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-warning bg-gradient fs-4 rounded-3 p-3">
-                                        <img src="{{ asset('logo/design.png') }}" alt="" srcset=""
-                                            width="128px" height="128px">
-                                    </div>
-                                    <h4 class="fw-semibold mb-0 text-body-emphasis">
-                                        {{ __('app.label_design_logo_and_poster') }}</h4>
-                                    <p class="text-body-secondary">{{ __('app.label_design_logo_and_poster_info') }}</p>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        </div>
+        @yield('contents')
 
         <div class="container-fluid bg-light" id="about_page">
             <div class="container py-5">
@@ -277,28 +174,47 @@
                     <div class="col-sm-6">
                         <form action="{{ url('/') }}" method="post">
                             <h4 class="mb-2">{{ __('app.contact_info') }}</h4>
+                            <div class="row g-3">
+                                <div class="col">
                             <div class="mb-2">
                                 <label for="floatingName" class="form-label">{{ __('app.full_name') }}</label>
                                 <input type="text" class="form-control" id="floatingName"
                                     placeholder="{{ __('app.input_name') }}">
                             </div>
+                                </div>
+                                <div class="col">
                             <div class="mb-2">
                                 <label for="floatingInput" class="form-label">{{ __('app.email') }}</label>
                                 <input type="email" class="form-control" id="floatingInput"
                                     placeholder="{{ __('app.input_email') }}">
+                            </div>
+                                </div>
                             </div>
                             <div class="mb-2">
                                 <label for="floatingTextarea2" class="form-label">{{ __('app.description') }}</label>
                                 <textarea class="form-control" placeholder="{{ __('app.input_description') }}" id="floatingTextarea2"
                                     style="height: 100px"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary"><i class="bi bi-send-fill me-1"></i>
+                            <button type="submit" class="btn btn-primary mt-2"><i class="bi bi-send-fill me-1"></i>
                                 {{ __('app.btn_submit') }}</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="container">
+            <footer class="py-0">
+              <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-2">
+                <p>© {{ now()->year}} Karona Srun, Inc. All rights reserved.</p>
+                <ul class="list-unstyled d-flex">
+                  <li class="ms-3"><a class="btn btn-outline-primary" href="#"><i class="bi bi-facebook"></i></a></li>
+                  <li class="ms-3"><a class="btn btn-outline-danger" href="#"><i class="bi bi-instagram"></i></a></li>
+                  <li class="ms-3"><a class="btn btn-outline-primary" href="#"><i class="bi bi-telegram"></i></a></li>
+                  <li class="ms-3"><a class="btn btn-outline-secondary" href="#"><i class="bi bi-github"></i></a></li>
+                </ul>
+              </div>
+            </footer>
+          </div>
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
