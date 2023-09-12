@@ -523,7 +523,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <script>
-        // @formatter:off
         document.addEventListener("DOMContentLoaded", function() {
             var el;
             window.TomSelect && (new TomSelect(el = document.getElementById('select-users'), {
@@ -549,10 +548,7 @@
                 },
             }));
         });
-        // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
+
         document.addEventListener("DOMContentLoaded", function() {
             var el;
             window.TomSelect && (new TomSelect(el = document.getElementsByClassName('select-option'), {
@@ -578,7 +574,6 @@
                 },
             }));
         });
-        // @formatter:on
     </script>
     @yield('js')
 </body>

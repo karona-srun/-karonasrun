@@ -360,7 +360,7 @@
                                                             </svg> Is Free</label>
                                                         <select type="text" class="form-select select-users is_free"
                                                             name="is_free" placeholder="Select a date">
-                                                            <option value="1">Yes</option>
+                                                            <option value="1" selected>Yes</option>
                                                             <option value="0">No</option>
                                                         </select>
                                                         @if ($errors->has('is_free'))
@@ -407,7 +407,7 @@
                                                                 </svg>
                                                             </span>
                                                             <input type="number" name="price" step="any" readonly
-                                                                value="{{ old('price' ?? 0) }}"
+                                                                value="{{ old('price') ?? '0.0' }}"
                                                                 class="form-control price" placeholder="Input number">
                                                         </div>
                                                         @if ($errors->has('price'))

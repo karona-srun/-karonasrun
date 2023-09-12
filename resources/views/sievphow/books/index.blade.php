@@ -60,9 +60,8 @@
                                         <th>Is Enabled</th>
                                         <th>Is Free</th>
                                         <th>Price</th>
-                                        <th>Created At</th>
-                                        <th>Updated At</th>
-                                        <th>Deleted At</th>
+                                        <th>Author</th>
+                                        <th>Publisher</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -80,9 +79,8 @@
                                             <td>{{ $item->is_enabled ? 'Yes' : 'No' }}</td>
                                             <td>{{ $item->is_free ? 'Yes' : 'No' }}</td>
                                             <td>{{ $item->price }}</td>
-                                            <td>{{ $item->created_at }}</td>
-                                            <td>{{ $item->updated_at }}</td>
-                                            <td>{{ $item->deleted_at }}</td>
+                                            <td>{{ $item->author }}</td>
+                                            <td>{{ $item->publisher }}</td>
                                             <td>
                                                 <a href="{{ url('/sievphow/book',$item->id) }}" class="btn btn-info btn-show btn-icon"
                                                     data-id="{{ $item->id }}">

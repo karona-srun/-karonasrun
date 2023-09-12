@@ -275,7 +275,7 @@
                         <p>{{ __('app.about_page_info') }}</p>
                     </div>
                     <div class="col-sm-6">
-                        <form action="{{ url('/') }}" method="post">
+                        <form action="{{ url('/') }}" method="get">
                             <h4 class="mb-2">{{ __('app.contact_info') }}</h4>
                             <div class="mb-2">
                                 <label for="floatingName" class="form-label">{{ __('app.full_name') }}</label>
