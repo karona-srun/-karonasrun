@@ -486,7 +486,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="col-sm-4 mt-3">
                                         <div class="mb-0">
                                             <div class="form-label required"><svg xmlns="http://www.w3.org/2000/svg"
@@ -531,7 +531,7 @@
                                                 {{ $errors->first('pdf') }}</span>
                                         @endif
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class=" card-footer">
                                 <button type="reset" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg"

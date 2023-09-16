@@ -480,7 +480,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-4 mt-3">
+                                    {{-- <div class="col-sm-4 mt-3">
                                         <div class="mb-0">
                                             <div class="form-label required"><svg xmlns="http://www.w3.org/2000/svg"
                                                     class="icon icon-tabler icon-tabler-vinyl me-2" width="24"
@@ -500,8 +500,8 @@
                                             <span class="error text-danger float-start mb-3 mt-1">
                                                 {{ $errors->first('audio') }}</span>
                                         @endif
-                                    </div>
-                                    <div class="col-sm-4 mt-3">
+                                    </div> --}}
+                                    {{-- <div class="col-sm-4 mt-3">
                                         <div class="mb-0">
                                             <div class="form-label required"><svg xmlns="http://www.w3.org/2000/svg"
                                                     class="icon icon-tabler icon-tabler-file-type-pdf me-2  "
@@ -523,7 +523,7 @@
                                             <span class="error text-danger float-start mb-3 mt-1">
                                                 {{ $errors->first('pdf') }}</span>
                                         @endif
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class=" card-footer">

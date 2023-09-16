@@ -40,6 +40,8 @@ Route::group(['middleware' => 'auth'], function ($router) {
   Route::resource('sievphow/slide-image', '\App\Http\Controllers\SievphowSlideImageController');
   Route::resource('sievphow/book-category', '\App\Http\Controllers\SievphowBookCategoriesController');
   Route::resource('sievphow/book', '\App\Http\Controllers\SievphowBooKController');
+  Route::post('sievphow/book/upload-files', [App\Http\Controllers\SievphowBooKController::class, 'uploadFiles']);
+  Route::post('sievphow/book/delete-files', [App\Http\Controllers\SievphowBooKController::class, 'deleteFiles']);
   Route::resource('sievphow/user', '\App\Http\Controllers\SievphowUserController');
   Route::get('/sievphow/user-change-password/{id}', [App\Http\Controllers\SievphowUserController::class,'changePasswordForm']);
   Route::post('sievphow/user/change-password', [App\Http\Controllers\SievphowUserController::class,'changePassword']);

@@ -29,8 +29,7 @@
                                     and delete operations.
                                 </div>
                                 <div class="mt-3">
-                                    <a href="#" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#modal-book-category">
+                                    <a href="{{ url('sievphow/book-category/create') }}" class="btn btn-primary">
                                         <i class="ti ti-playlist-add"></i>
                                         Create new
                                     </a>
@@ -75,25 +74,32 @@
                                                     aria-label="Select invoice"></td>
                                             <td><span class="text-muted">{{ ++$i }}</span></td>
                                             <td>
-                                                <img src="{{ asset('/images/sievphow/book_category/'.$item->images) }}" alt="" srcset=""
-                                                    class="avatar me-2">
+                                                <img src="{{ asset($item->images) }}"
+                                                    alt="" srcset="" class="avatar me-2">
                                             </td>
-                                            <td>{{ $item->name_kh }} <br>{{ $item->name_en }}</td>
+                                            <td>{{ $item->name_en }}</td>
+                                            <td>{{ $item->name_kh }}</td>
                                             <td>{{ $item->status ? 'Active' : 'Inactive' }}</td>
                                             <td>{{ $item->created_at }}</td>
                                             <td>{{ $item->updated_at }}</td>
                                             <td>{{ $item->deleted_at }}</td>
                                             <td>
-                                                <button type="button" class="btn btn-warning btn-edit btn-icon"
-                                                    data-bs-toggle="modal" data-bs-target="#modal-book-category"
-                                                    data-id="{{ $item->id }}">
+                                                <div class="row g-2 align-items-center">
+                                                    <div class="col-6 col-sm-4 col-md-2 col-xl-auto">
+                                                       <a href="{{ url('sievphow/book-category/'. $item->id .'/edit') }}" class="btn btn-warning btn-edit btn-icon me-2">
                                                     <i class="ti ti-pencil"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-icon btn-delete"
-                                                    data-id="{{ $item->id }}" data-bs-toggle="modal"
-                                                    data-bs-target="#modal-danger">
+                                                </a>
+                                                      </div>
+                                                      <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
+                                                       <form action="{{ url('sievphow/book-category/'. $item->id )}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-icon btn-delete">
                                                     <i class="ti ti-playlist-x"></i>
                                                 </button>
+                                            </form>
+                                                      </div>
+                                        </div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -160,68 +166,73 @@
     </div>
 @endsection
 @section('modals')
-    <div class="modal modal-blur fade" id="modal-book-category" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal modal-blur fade" id="modal-success" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
             <div class="modal-content">
-                <form id="contentTypeForm" name="contentTypeForm" method="post" class="form-horizontal"
-                    enctype="multipart/form-data">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Book Category</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-status bg-success"></div>
+                <div class="modal-body text-center py-4">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/circle-check -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M9 12l2 2l4 -4" />
+                    </svg>
+                    <h3>Create successed</h3>
+                    <div class="text-muted">Your created has been successfully submitted.</div>
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100">
                         <div class="row">
-                            <input type="hidden" name="id" id="id" value="" class="form-control">
-                            <div class="col-sm-4">
-                                <img id="preview-image-before-upload" class="avatar avatar-upload rounded" data-url=""
-                                    src="https://icons.veryicon.com/png/o/miscellaneous/mobile-aone/plus-46.png"
-                                    alt="preview" style="height: 210px; width: 210px;">
-                                <input type="file" id="image" required name="image"
-                                    class="form-control form-control-file" accept="image/*" id="exampleFormControlFile1"
-                                    style="display: none">
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="row">
-                                    <div class="co-12 mb-2 align-items-end">
-                                        <label class="form-label">Status</label>
-                                        <select type="text" name="status" id="select-tags select-tags status content_type"
-                                            class="form-select" placeholder="Select a video cagetory" value="">
-                                            <option value="1">Active</option>
-                                            <option value="0">Inactive</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-12 mb-2 align-items-end">
-                                        <label class="form-label">Name as Khmer</label>
-                                        <input type="text" name="name_kh" id="name_kh" class="form-control name_kh">
-                                    </div>
-                                    <div class="col-12 mb-2 align-items-end">
-                                        <label class="form-label">Name as English</label>
-                                        <input type="text" name="name_en" id="name_en" class="form-control name_en">
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="col"><a href="#" class="btn btn-success w-100 btn-reload"
+                                    data-bs-dismiss="modal">
+                                    Done
+                                </a></div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-                            Cancel
-                        </a>
-                        <button type="submit" class="btn btn-primary ms-auto" id="btn-save" data-bs-dismiss="modal">
-                            <i class="ti ti-file-check me-2"></i>
-                            Save
-                        </button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-    <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <div class="modal modal-blur fade" id="modal-success-update" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-status bg-success"></div>
+                <div class="modal-body text-center py-4">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/circle-check -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M9 12l2 2l4 -4" />
+                    </svg>
+                    <h3>Update successed</h3>
+                    <div class="text-muted">Your updated has been successfully submitted.</div>
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                        <div class="row">
+                            <div class="col"><a href="#" class="btn btn-success w-100 btn-reload"
+                                    data-bs-dismiss="modal">
+                                    Done
+                                </a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-blur fade" id="modal-success-delete" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
             <div class="modal-content">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-status bg-danger"></div>
                 <div class="modal-body text-center py-4">
-                    <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24"
                         height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -230,19 +241,15 @@
                         <path
                             d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75" />
                     </svg>
-                    <h3>Are you sure?</h3>
-                    <div class="text-muted">Do you really want to remove video category? What you've done cannot be undone.
-                    </div>
+                    <h3>Delete successed</h3>
+                    <div class="text-muted">Your delete has been successfully submitted.</div>
                 </div>
                 <div class="modal-footer">
                     <div class="w-100">
                         <div class="row">
-                            <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
-                                    Cancel
-                                </a></div>
-                            <div class="col"><a href="#" class="btn btn-danger btn-modal-delete w-100"
+                            <div class="col"><a href="#" class="btn btn-danger w-100 btn-reload"
                                     data-bs-dismiss="modal">
-                                    Delete
+                                    Done
                                 </a></div>
                         </div>
                     </div>
@@ -298,9 +305,9 @@
                     success: function(data) {
                         $('#contentTypeForm').trigger("reset");
                         console.log(data.progress_status)
-                        if(data.progress_status == true){
+                        if (data.progress_status == true) {
                             $('#modal-success').modal('toggle');
-                        }else{
+                        } else {
                             $('#modal-updated').modal('toggle');
                         }
                     },
@@ -324,8 +331,9 @@
                     $('#status').val(data.data.status);
                     $('#name_kh').val(data.data.name_kh);
                     $('#name_en').val(data.data.name_en);
-                    $('select option[value='+data.data.status+']').attr('selected', 'selected');
-                    $('#preview-image-before-upload').attr('src', '/images/sievphow/book_category/'+data.data.images);
+                    $('select option[value=' + data.data.status + ']').attr('selected', 'selected');
+                    $('#preview-image-before-upload').attr('src',
+                        '/images/sievphow/book_category/' + data.data.images);
                 })
             });
 
@@ -343,4 +351,26 @@
             });
         });
     </script>
+
+    @if (!empty(Session::get('code')) && Session::get('code') == 1)
+        <script>
+            $(document).ready(function() {
+                $('#modal-success').modal('show');
+            });
+        </script>
+    @endif
+    @if (!empty(Session::get('code')) && Session::get('code') == 2)
+        <script>
+            $(document).ready(function() {
+                $('#modal-success-update').modal('show');
+            });
+        </script>
+    @endif
+    @if (!empty(Session::get('code')) && Session::get('code') == 3)
+        <script>
+            $(document).ready(function() {
+                $('#modal-success-delete').modal('show');
+            });
+        </script>
+    @endif
 @endsection

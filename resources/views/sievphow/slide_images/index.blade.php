@@ -29,11 +29,15 @@
                                     and delete operations.
                                 </div>
                                 <div class="mt-3">
-                                    <a href="#" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#modal-sievphow-image-slide">
+                                    <a href="{{ url('sievphow/slide-image/create') }}" class="btn btn-primary">
                                         <i class="ti ti-playlist-add"></i>
                                         Create new
                                     </a>
+                                    {{-- <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modal-sievphow-image-slide">
+                                        <i class="ti ti-playlist-add"></i>
+                                        Create new
+                                    </a> --}}
                                 </div>
                             </div>
                         </div>
@@ -80,16 +84,22 @@
                                             <td>{{ $item->updated_at }}</td>
                                             <td>{{ $item->deleted_at }}</td>
                                             <td>
-                                                <button type="button" class="btn btn-warning btn-edit btn-icon"
-                                                    data-bs-toggle="modal" data-bs-target="#modal-sievphow-image-slide"
-                                                    data-id="{{ $item->id }}">
+                                                <div class="row g-2 align-items-center">
+                                                    <div class="col-6 col-sm-4 col-md-2 col-xl-auto">
+                                                       <a href="{{ url('sievphow/slide-image/'. $item->id .'/edit') }}" class="btn btn-warning btn-edit btn-icon me-2">
                                                     <i class="ti ti-pencil"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-icon btn-delete"
-                                                    data-id="{{ $item->id }}" data-bs-toggle="modal"
-                                                    data-bs-target="#modal-danger">
+                                                </a>
+                                                      </div>
+                                                      <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
+                                                       <form action="{{ url('sievphow/slide-image/'. $item->id )}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-icon btn-delete">
                                                     <i class="ti ti-playlist-x"></i>
                                                 </button>
+                                            </form>
+                                                      </div>
+                                        </div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -235,8 +245,98 @@
             </div>
         </div>
     </div>
-@endsection
+    <div class="modal modal-blur fade" id="modal-success" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-status bg-success"></div>
+                <div class="modal-body text-center py-4">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/circle-check -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M9 12l2 2l4 -4" />
+                    </svg>
+                    <h3>Create successed</h3>
+                    <div class="text-muted">Your created has been successfully submitted.</div>
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                        <div class="row">
+                            <div class="col"><a href="#" class="btn btn-success w-100 btn-reload"
+                                    data-bs-dismiss="modal">
+                                    Done
+                                </a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="modal modal-blur fade" id="modal-success-update" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-status bg-success"></div>
+                <div class="modal-body text-center py-4">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/circle-check -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M9 12l2 2l4 -4" />
+                    </svg>
+                    <h3>Update successed</h3>
+                    <div class="text-muted">Your updated has been successfully submitted.</div>
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                        <div class="row">
+                            <div class="col"><a href="#" class="btn btn-success w-100 btn-reload"
+                                    data-bs-dismiss="modal">
+                                    Done
+                                </a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-blur fade" id="modal-success-delete" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-status bg-danger"></div>
+                <div class="modal-body text-center py-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M12 9v2m0 4v.01" />
+                        <path
+                            d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75" />
+                    </svg>
+                    <h3>Delete successed</h3>
+                    <div class="text-muted">Your delete has been successfully submitted.</div>
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                        <div class="row">
+                            <div class="col"><a href="#" class="btn btn-danger w-100 btn-reload"
+                                    data-bs-dismiss="modal">
+                                    Done
+                                </a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 
 @section('js')
     <script>
@@ -327,4 +427,27 @@
             });
         });
     </script>
+
+    @if(!empty(Session::get('code')) && Session::get('code') == 1)
+    <script>
+    $(document).ready(function() {
+        $('#modal-success').modal('show');
+    });
+    </script>
+    @endif
+    @if(!empty(Session::get('code')) && Session::get('code') == 2)
+    <script>
+    $(document).ready(function() {
+        $('#modal-success-update').modal('show');
+    });
+    </script>
+    @endif
+    @if(!empty(Session::get('code')) && Session::get('code') == 3)
+    <script>
+    $(document).ready(function() {
+        $('#modal-success-delete').modal('show');
+    });
+    </script>
+    @endif
+    
 @endsection

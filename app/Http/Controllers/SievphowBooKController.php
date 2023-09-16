@@ -7,6 +7,7 @@ use App\Models\Books;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class SievphowBooKController extends Controller
@@ -202,6 +203,46 @@ class SievphowBooKController extends Controller
         $book->save();
         
         return redirect('/sievphow/book')->with('success','label_created_successfully');
+    }
+
+    public function uploadFiles(Request $request)
+    {
+        $book = Books::find($request->id);
+        if ($request->file('audio')) {
+            File::delete('images/sievphow/audios/' . $book->image);
+            $file = $request->file('audio');
+            $audio_filename = date('YmdHi') . str_replace(' ', '_', $file->getClientOriginalName());
+            $file->move(public_path('images/sievphow/audios'), $audio_filename);
+            $book->audio = $audio_filename;
+        }
+
+        if ($request->file('pdf')) {
+            File::delete('images/sievphow/pdfs/' . $book->pdf);
+            $file = $request->file('pdf');
+            $pdf_filename = date('YmdHi') . str_replace(' ', '_', $file->getClientOriginalName());
+            $file->move(public_path('images/sievphow/pdfs'), $pdf_filename);
+            $book->pdf = $pdf_filename;
+        }
+        $book->save();
+
+        return Redirect::back()->with('code', 5);
+    }
+
+    
+    public function deleteFiles(Request $request)
+    {
+        $book = Books::find($request->id);
+        if ($request->audio) {
+            File::delete('images/sievphow/audios/' . $request->audio);
+            $book->audio = "";
+        }
+
+        if ($request->pdf) {
+            File::delete('images/sievphow/pdfs/' . $request->pdf);
+            $book->pdf = "";
+        }
+        $book->save();
+        return Redirect::back()->with('code', 6);
     }
 
     /**
