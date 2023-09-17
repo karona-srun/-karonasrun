@@ -386,7 +386,7 @@
                                                                 <path
                                                                     d="M17 9v-2a2 2 0 0 0 -2 -2h-10a2 2 0 0 0 -2 2v6a2 2 0 0 0 2 2h2">
                                                                 </path>
-                                                            </svg> Price</label>
+                                                            </svg> Price($)</label>
                                                         <div class="input-icon">
                                                             <span class="input-icon-addon">
                                                                 <svg xmlns="http://www.w3.org/2000/svg"

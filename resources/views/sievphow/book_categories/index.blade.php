@@ -74,8 +74,8 @@
                                                     aria-label="Select invoice"></td>
                                             <td><span class="text-muted">{{ ++$i }}</span></td>
                                             <td>
-                                                <img src="{{ asset($item->images) }}"
-                                                    alt="" srcset="" class="avatar me-2">
+                                                <img src="{{ asset($item->images) }}" alt="" srcset=""
+                                                    class="avatar me-2">
                                             </td>
                                             <td>{{ $item->name_en }}</td>
                                             <td>{{ $item->name_kh }}</td>
@@ -86,20 +86,23 @@
                                             <td>
                                                 <div class="row g-2 align-items-center">
                                                     <div class="col-6 col-sm-4 col-md-2 col-xl-auto">
-                                                       <a href="{{ url('sievphow/book-category/'. $item->id .'/edit') }}" class="btn btn-warning btn-edit btn-icon me-2">
-                                                    <i class="ti ti-pencil"></i>
-                                                </a>
-                                                      </div>
-                                                      <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                       <form action="{{ url('sievphow/book-category/'. $item->id )}}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-icon btn-delete">
-                                                    <i class="ti ti-playlist-x"></i>
-                                                </button>
-                                            </form>
-                                                      </div>
-                                        </div>
+                                                        <a href="{{ url('sievphow/book-category/' . $item->id . '/edit') }}"
+                                                            class="btn btn-warning btn-edit btn-icon me-2">
+                                                            <i class="ti ti-pencil"></i>
+                                                        </a>
+                                                    </div>
+                                                    {{-- <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
+                                                        <form action="{{ url('sievphow/book-category/' . $item->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="btn btn-danger btn-icon btn-delete">
+                                                                <i class="ti ti-playlist-x"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div> --}}
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -81,12 +81,12 @@
                                                 <img src="{{ asset('/images/sievphow/books/'.$item->image) }}" alt="" srcset=""
                                                     class="avatar me-2">
                                             </td>
-                                            <td>{{ $item->category->name_kh
-                                             }} <br> {{ $item->category->name_en }}</td>
+                                            <td>{{ $item->category->name_kh ?? ''
+                                             }} <br> {{ $item->category->name_en ?? '' }}</td>
                                             <td>{{ $item->title_kh }} <br> {{ $item->title_en }}</td>
                                             <td>{{ $item->is_enabled ? 'Yes' : 'No' }}</td>
                                             <td>{{ $item->is_free ? 'Yes' : 'No' }}</td>
-                                            <td>{{ $item->price }}</td>
+                                            <td>${{ $item->price }}</td>
                                             <td>{{ $item->author }}</td>
                                             <td>{{ $item->publisher }}</td>
                                             <td>

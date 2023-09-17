@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Karona Developer</title>
+    <title>Karona Developer | Home</title>
 
     <link rel="shortcut icon" href="{{ asset('logo/Logo_white.png') }}">
     <!-- Fonts -->
@@ -172,7 +172,7 @@
                         <p>{{ __('app.about_page_info') }}</p>
                     </div>
                     <div class="col-sm-6">
-                        <form action="{{ url('/') }}" method="post">
+                        <form action="{{ url('/') }}" method="get">
                             <h4 class="mb-2">{{ __('app.contact_info') }}</h4>
                             <div class="row g-3">
                                 <div class="col">
